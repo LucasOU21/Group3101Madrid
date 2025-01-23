@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Group3101Madrid</string>
-    <string name="app_name">Group3101Madrid</string>
     <string name="email">Correo Electrónico</string>
     <string name="contrasenia">Contraseña</string>
     <string name="repetir_contrase_a">Repetir contraseña</string>
@@ -10,5 +9,9 @@
     <string name="crea_tu_cuenta">Crea tu cuenta</string>
     <string name="terminos">He leído y acepto la Política de Privacidad y los Términos y Condiciones.</string>
     <string name="crear_cuenta">Crear cuenta</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="introduzca_tu_contrase_a">Introduzca tu contraseña</string>
 
 </resources>
