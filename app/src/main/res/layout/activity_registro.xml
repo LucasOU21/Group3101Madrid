@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".Registro">
 
     <LinearLayout
@@ -96,14 +97,16 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editTextNombreUsuario"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/nombre_de_usuario"
                 android:inputType="textPassword"
                 android:padding="10dp"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:textColorHint="@color/green" />
 
             <View
@@ -120,14 +123,16 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editTextCorreo"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/email"
                 android:inputType="textPassword"
                 android:padding="10dp"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:textColorHint="@color/green" />
 
             <View
@@ -143,14 +148,16 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editContrasenia1"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/contrasenia"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:textColorHint="@color/green" />
 
             <View
@@ -166,13 +173,15 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editContrasenia2"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasswordAgain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/repetir_contrase_a"
                 android:inputType="textPassword"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
 
@@ -185,9 +194,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/cbTerms"
                     android:layout_width="38dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"/>
 
                 <TextView
                     android:id="@+id/textView8"
@@ -205,11 +216,13 @@
                 android:layout_height="16dp" />
 
             <Button
-                android:id="@+id/btncrearcuenta"
+                android:id="@+id/btnRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@string/crear_cuenta"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:backgroundTint="@color/green"
                 android:textColor="@color/white" />
 
