@@ -20,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="29dp"
             android:layout_gravity="center_vertical"
             android:contentDescription="Culture Icon"
             android:src="@drawable/img_101_logo" />
@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/tvExperencias"
             android:layout_width="160dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:text="Experencias culturales"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -55,24 +55,36 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido de nuevo"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:textSize="30dp"
+
             <!-- Email Label -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Nombre de Usuario"
                 android:textSize="16sp"
                 android:textColor="@color/light_gray2"
+                android:layout_marginTop="130dp"
                 android:paddingBottom="4dp"/>
 
             <!-- Email Input -->
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your email"
+                android:hint="Introduzca tu usuario"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
+                android:gravity="center"
                 android:textColorHint="@color/green"
-                android:background="@color/dark_gray"/>
+                android:background="@color/dark_gray"
+                android:drawableStart="@drawable/img_username"/>
+                />
 
             <!-- Space between Email and Password -->
             <View
@@ -83,24 +95,40 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="Contraseña"
                 android:textSize="16sp"
                 android:textColor="@color/light_gray2"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+
+                />
 
             <!-- Password Input -->
             <EditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your password"
+                android:hint="Introduzca tu contraseña"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColorHint="@color/green"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
                 android:background="@color/dark_gray"/>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Iniciar Sesion"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:layout_marginLeft="80dp"/>
+
+
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
