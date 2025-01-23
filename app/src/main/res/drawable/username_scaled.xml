@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/img_username"
+            android:gravity="center"
+            android:width="20px"
+            android:height="20px" />
+    </item>
+</layer-list>
