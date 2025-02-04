@@ -103,11 +103,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/nombre_de_usuario"
-                android:inputType="textPassword"
+                android:gravity="center"
                 android:padding="10dp"
                 android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:textColorHint="@color/green" />
+                android:minHeight="45dp"
+                android:textColorHint="@color/green"
+                android:drawableStart="@drawable/img_username"/>
 
             <View
                 android:id="@+id/view5"
@@ -129,10 +130,11 @@
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/email"
-                android:inputType="textPassword"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:minWidth="48dp"
-                android:minHeight="48dp"
+                android:minHeight="45dp"
                 android:textColorHint="@color/green" />
 
             <View
@@ -154,11 +156,13 @@
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/contrasenia"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:padding="10dp"
                 android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:textColorHint="@color/green" />
+                android:minHeight="45dp"
+                android:gravity="center"
+                android:textColorHint="@color/green"
+                android:drawableStart="@drawable/img_password"/>
 
             <View
                 android:layout_width="match_parent"
@@ -180,8 +184,9 @@
                 android:background="@color/dark_gray"
                 android:hint="@string/repetir_contrase_a"
                 android:inputType="textPassword"
+                android:gravity="center"
                 android:minWidth="48dp"
-                android:minHeight="48dp"
+                android:minHeight="45dp"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
 

@@ -105,7 +105,7 @@
                 android:textColorHint="@color/green"
                 android:background="@color/dark_gray"
                 android:drawableStart="@drawable/img_username"/>
-                />
+
 
             <!-- Space between Email and Password -->
             <View
