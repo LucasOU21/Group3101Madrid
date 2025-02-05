@@ -1,84 +1,63 @@
 package com.example.group3101madrid;
-
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.group3101madrid.databinding.ActivityRegistroBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Registro extends AppCompatActivity {
+    private static final String TAG = "RegistroDebug";
 
-    // Inicializar variables
     TextInputEditText etUsername, etEmail, etPassword, etPasswordAgain;
-    Button btnRegistro;
     ProgressBar progressBar;
     CheckBox cbTerms;
     FirebaseAuth mAuth;
+    ActivityRegistroBinding binding;
+    FirebaseDatabase firebase;
+    DatabaseReference dbRef;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
 
-        // Asignar los componentes a la vista
-        etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        etPasswordAgain = findViewById(R.id.etPasswordAgain);
-        btnRegistro = findViewById(R.id.btnRegistro);
-        cbTerms = findViewById(R.id.cbTerms);
+        // Fix: Remove the first setContentView call and only use binding
+        binding = ActivityRegistroBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Obtener una instancia de FirebaseAuth
-        mAuth = FirebaseAuth.getInstance();
+        try {
+            // Initialize views with proper binding
+            etUsername = binding.etUsername;
+            etEmail = binding.etEmail;
+            etPassword = binding.etPassword;
+            etPasswordAgain = binding.etPasswordAgain;
+            cbTerms = binding.cbTerms;
+            progressBar = binding.progressBar;
 
-        etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus && etUsername.getText().toString().equals("Username")) {
-                    etUsername.setText("");
-                }
-            }
-        });
+            Log.d(TAG, "onCreate: Views initialized successfully");
 
-        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus && etEmail.getText().toString().equals("Email")) {
-                    etUsername.setText("");
-                }
-            }
-        });
+            // Initialize Firebase instances
+            mAuth = FirebaseAuth.getInstance();
+            firebase = FirebaseDatabase.getInstance();
+            dbRef = firebase.getReference("users");
+            Log.d(TAG, "onCreate: Firebase initialized successfully");
+        } catch (Exception e) {
+            Log.e(TAG, "onCreate: Error during initialization", e);
+        }
 
-        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus && etPassword.getText().toString().equals("Pasword")) {
-                    etUsername.setText("");
-                }
-            }
-        });
+        binding.btnRegistro.setOnClickListener(view -> {
+            Log.d(TAG, "onRegisterClick: Register button clicked");
 
-        etPasswordAgain.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus && etUsername.getText().toString().equals("PasswordAgain")) {
-                    etUsername.setText("");
-                }
-            }
-        });
-
-        // Register button click listener
-        btnRegistro.setOnClickListener(view -> {
             String username = etUsername.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
@@ -89,7 +68,7 @@ public class Registro extends AppCompatActivity {
                 Toast.makeText(Registro.this, "Introduce un nombre de usuario", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 Toast.makeText(Registro.this, "Introduce un email válido", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -106,25 +85,47 @@ public class Registro extends AppCompatActivity {
                 return;
             }
 
-            // Show progress bar
-            progressBar.setVisibility(View.VISIBLE);
+            // Show progress bar - Now it won't be null
+            if (progressBar != null) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
 
             // Create user with Firebase Auth
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(Registro.this, task -> {
-                        progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(Registro.this, "Cuenta creada con éxito", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), Login.class);
-                            startActivity(i);
-                            finish(); // Close the current activity
+                            // Get the newly created user's ID
+                            String userId = mAuth.getCurrentUser().getUid();
+
+                            // Create User object
+                            User user = new User(username, email);
+
+                            // Save user data to Realtime Database
+                            dbRef.child(userId).setValue(user)
+                                    .addOnCompleteListener(dbTask -> {
+                                        if (progressBar != null) {
+                                            progressBar.setVisibility(View.GONE);
+                                        }
+
+                                        if (dbTask.isSuccessful()) {
+                                            Log.d(TAG, "User data saved successfully");
+                                            Toast.makeText(Registro.this, "Cuenta creada con éxito", Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(getApplicationContext(), Login.class);
+                                            startActivity(i);
+                                            finish();
+                                        } else {
+                                            Log.w(TAG, "Failed to save user data", dbTask.getException());
+                                            Toast.makeText(Registro.this, "Error al guardar datos de usuario", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         } else {
+                            if (progressBar != null) {
+                                progressBar.setVisibility(View.GONE);
+                            }
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Registro.this, "Error al crear la cuenta: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         });
     }
-
 }
