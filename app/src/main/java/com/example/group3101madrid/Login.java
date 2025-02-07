@@ -27,16 +27,18 @@ public class Login extends AppCompatActivity {
     DatabaseReference dbRef;
     ProgressBar progressBar;
 
+    /*
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), Home.class);
             startActivity(i);
         }
     }
 
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +107,7 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
                         Toast.makeText(Login.this, "Login realizado con éxito", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent i = new Intent(getApplicationContext(), Home.class);
                         startActivity(i);
                         finish();
                     } else {

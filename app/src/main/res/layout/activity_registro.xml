@@ -74,13 +74,14 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editTextNombreUsuario"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/nombre_de_usuario"
-                android:inputType="textPassword"
+                android:inputType="text"
+                android:textColor="@color/white"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
 
@@ -98,13 +99,14 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editTextCorreo"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/email"
-                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
 
@@ -121,13 +123,14 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editContrasenia1"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/contrasenia"
-                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
 
@@ -144,12 +147,13 @@
                 android:textColor="@color/light_gray2"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editContrasenia2"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasswordAgain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
                 android:hint="@string/repetir_contrase_a"
+                android:textColor="@color/white"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColorHint="@color/green" />
@@ -163,7 +167,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/cbTerms"
                     android:layout_width="38dp"
                     android:layout_height="match_parent" />
 
@@ -183,13 +187,21 @@
                 android:layout_height="16dp" />
 
             <Button
-                android:id="@+id/btncrearcuenta"
+                android:id="@+id/btnRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/green"
                 android:padding="10dp"
                 android:text="@string/crear_cuenta"
                 android:textColor="@color/white" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

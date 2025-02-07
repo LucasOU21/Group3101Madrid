@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
+
+        <!-- Other Activities -->
+        <activity
+            android:name=".Iniciodesafios"
+            android:exported="false" />
         <activity
             android:name=".Perfil"
             android:exported="false" />
@@ -21,24 +26,18 @@
         <activity
             android:name=".Registro"
             android:exported="false" />
+
+        <!-- Login Activity (Launcher) -->
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
     </application>
 
 </manifest>
