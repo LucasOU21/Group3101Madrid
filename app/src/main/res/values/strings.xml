@@ -13,5 +13,9 @@
     <string name="olvidaste_tu_contrase_a">¿Olividaste tu contraseña</string>
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="title_activity_home2">Home2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

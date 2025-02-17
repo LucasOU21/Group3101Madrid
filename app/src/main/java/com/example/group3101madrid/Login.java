@@ -27,6 +27,8 @@ public class Login extends AppCompatActivity {
     DatabaseReference dbRef;
     ProgressBar progressBar;
 
+
+    //planificacion del recordar usuario
     /*
     @Override
     protected void onStart() {

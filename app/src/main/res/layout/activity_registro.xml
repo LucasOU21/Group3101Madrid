@@ -190,7 +190,7 @@
                 android:id="@+id/btnRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/green"
+                android:backgroundTint="@color/green"
                 android:padding="10dp"
                 android:text="@string/crear_cuenta"
                 android:textColor="@color/white" />
