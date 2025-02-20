@@ -196,7 +196,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Other Rankings List -->
+    <!-- Update RecyclerView to not overlap with bottom nav -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRankingList"
         android:layout_width="match_parent"

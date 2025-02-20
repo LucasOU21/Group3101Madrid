@@ -8,12 +8,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.Navigation;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.example.group3101madrid.R;
 import com.example.group3101madrid.databinding.FragmentRankingHomeBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +29,8 @@ public class RankingHomeFragment extends Fragment {
     private RankingAdapter rankingAdapter;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentRankingHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -34,6 +38,7 @@ public class RankingHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         setupRecyclerView();
         setupTopThree();
         loadMockData();
@@ -41,10 +46,9 @@ public class RankingHomeFragment extends Fragment {
 
     private void setupRecyclerView() {
         rankingAdapter = new RankingAdapter();
-        RecyclerView recyclerView = binding.rvRankingList;
-        recyclerView.setAdapter(rankingAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
+        binding.rvRankingList.setAdapter(rankingAdapter);
+        binding.rvRankingList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvRankingList.addItemDecoration(new DividerItemDecoration(requireContext(),
                 LinearLayoutManager.VERTICAL));
     }
 
@@ -77,4 +81,3 @@ public class RankingHomeFragment extends Fragment {
         binding = null;
     }
 }
-

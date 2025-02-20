@@ -10,31 +10,36 @@
 
     <LinearLayout
         android:id="@+id/llTop_bar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="20dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="12dp"
+        android:background="@drawable/rounded_background"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/flecha"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/map_24"
+            android:layout_gravity="center_vertical"
+            app:tint="#FFFFFF"/>
 
         <TextView
             android:id="@+id/tvExperencias"
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Mapa"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginLeft="25dp"/>
+            android:textSize="24sp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
-    <!-- Add the map fragment -->
     <fragment
         android:id="@+id/fgMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
