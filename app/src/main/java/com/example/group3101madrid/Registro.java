@@ -88,7 +88,7 @@ public class Registro extends AppCompatActivity {
             // Show progress bar - Now it won't be null
             if (progressBar != null) {
                 progressBar.setVisibility(View.VISIBLE);
-            }
+            }/
 
             // Create user with Firebase Auth
             mAuth.createUserWithEmailAndPassword(email, password)

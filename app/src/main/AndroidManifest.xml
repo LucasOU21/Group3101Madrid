@@ -14,9 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
+        <activity
+            android:name=".UnirseGrupo"
+            android:exported="false" />
+        <activity
+            android:name=".CrearGrupo"
+            android:exported="false" />
+        <activity
+            android:name=".Amigos"
+            android:exported="false" />
+        <activity
+            android:name=".Grupos"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="your_api_key_here"/>
+            android:value="your_api_key_here" />
 
         <activity
             android:name=".ui.mapa.laMapaFragment"

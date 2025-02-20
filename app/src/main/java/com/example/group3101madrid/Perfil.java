@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Perfil extends AppCompatActivity {
 
     Button btnSignOut;
+    Button btnGrupos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,9 +16,15 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         btnSignOut = findViewById(R.id.btnSignOut);
+        btnGrupos = findViewById(R.id.btnGrupos);
 
         btnSignOut.setOnClickListener(view -> {
             Intent intent = new Intent(Perfil.this, Login.class);
+            startActivity(intent);
+        });
+
+        btnGrupos.setOnClickListener(view -> {
+            Intent intent = new Intent(Perfil.this, Grupos.class);
             startActivity(intent);
         });
 
