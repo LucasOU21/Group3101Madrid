@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,29 +14,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.mapa.laMapaFragment"
+            android:exported="false"
+            android:theme="@style/Theme.Group3101Madrid" />
         <activity
             android:name=".Main"
             android:exported="false"
             android:label="@string/title_activity_home2" />
-
         <activity
             android:name=".Iniciodesafios"
             android:exported="false" />
-
         <activity
             android:name=".Perfil"
             android:exported="false" />
-
         <activity
             android:name=".Registro"
             android:exported="false" />
-
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

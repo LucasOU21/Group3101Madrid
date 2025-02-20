@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_ranking_home" />
 
     <fragment
-        android:id="@+id/navigation_desafios_home"
-        android:name="com.example.group3101madrid.ui.desafios.DesafiosHomeFragment"
-        android:label="@string/desafios_navigation"
-        tools:layout="@layout/fragment_desafios_home" />
+        android:id="@+id/navigation_mapa"
+        android:name="com.example.group3101madrid.ui.mapa.laMapaFragment"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_la_mapa" />
 </navigation>
