@@ -4,19 +4,208 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.ranking.RankingHomeFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+
+
+
+    <!-- Header Group with Background -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/headerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#058E3F"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:src="@drawable/img_101_logo"/>
+
+            <TextView
+                android:id="@+id/tvRankingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Ranking de Amigos"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Update the cardPodium's constraint to reference new headerGroup -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPodium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/headerGroup">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Second Place -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSecondPlace"
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#E0E0E0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cardFirstPlace"
+                app:layout_constraintTop_toTopOf="@id/cardFirstPlace"
+                android:layout_marginTop="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivSecondPlace"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/foto_perfil_ejemplo"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#c0c0c0"/>
+
+                    <TextView
+                        android:id="@+id/tvSecondPlaceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="2º"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvSecondPlaceScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15 desafios"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- First Place -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFirstPlace"
+                android:layout_width="100dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#FFD700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivFirstPlace"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/foto_perfil_ejemplo"
+                        app:civ_border_width="3dp"
+                        app:civ_border_color="#ffd700"/>
+
+                    <TextView
+                        android:id="@+id/tvFirstPlaceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="1º"
+                        android:textSize="22sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvFirstPlaceScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20 desafios"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Third Place -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardThirdPlace"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#CD7F32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cardFirstPlace"
+                app:layout_constraintTop_toTopOf="@id/cardFirstPlace"
+                android:layout_marginTop="50dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivThirdPlace"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/foto_perfil_ejemplo"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#CD7F32"/>
+
+                    <TextView
+                        android:id="@+id/tvThirdPlaceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="3º"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvThirdPlaceScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12 desafios"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Other Rankings List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRankingList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardPodium"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
