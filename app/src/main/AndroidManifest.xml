@@ -40,7 +40,7 @@
             android:exported="false"
             android:label="@string/title_activity_home2" />
         <activity
-            android:name=".Iniciodesafios"
+            android:name=".DesafioDetailActivity"
             android:exported="false" />
         <activity
             android:name=".Perfil"

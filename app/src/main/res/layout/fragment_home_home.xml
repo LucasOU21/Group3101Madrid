@@ -105,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintTop_toBottomOf="@id/centerLayout"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -134,33 +134,59 @@
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
+                    android:id="@+id/container_kilometros"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="160dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/kilomarathon"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:text="101 Croquetas"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="101 Kilómetros de Madrid"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_canchas"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/cancha"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="101 Bares"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="101 Canchas Deportivas"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -173,33 +199,59 @@
                 android:layout_marginBottom="20dp">
 
                 <LinearLayout
+                    android:id="@+id/container_fuentes"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/fountains"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:text="101 sitios históricos"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="101 Fuentes de Madrid"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_monumentos"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="11dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/monumentos" />
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:text="101 talleres"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="101 Monumentos"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -207,7 +259,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Most Completed ⭐"
+                android:text="Más Completado ⭐"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -222,33 +274,59 @@
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
+                    android:id="@+id/container_playas"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/beachhome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="101 Playas"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_museos"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/museum"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="101 Museos"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -261,45 +339,61 @@
                 android:layout_marginBottom="20dp">
 
                 <LinearLayout
+                    android:id="@+id/container_poesia"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/poemshome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="101 poesía"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_jardines"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/gardenhome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="101 jardines"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <!-- Recent Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recents 🕒"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginBottom="10dp"/>
 
             <!-- Recent First Row -->
             <LinearLayout
@@ -310,33 +404,59 @@
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
+                    android:id="@+id/container_mercados"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/markethome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="101 Mercados"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_festivales"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/festivalhome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="101 Festivales"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -349,33 +469,60 @@
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
+                    android:id="@+id/container_teatros"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/theatre"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="101 Teatros"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
+
                 <LinearLayout
+                    android:id="@+id/container_galerias"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    android:background="@color/white"
+                    android:background="@drawable/white_container_selector"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="155dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/gallerieshome"
+                        android:scaleType="centerCrop"/>
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="101 Galerías"
-                        android:gravity="center"
-                        android:textSize="16sp" />
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
