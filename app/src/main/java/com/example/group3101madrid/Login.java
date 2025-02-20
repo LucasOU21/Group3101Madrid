@@ -8,24 +8,38 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.group3101madrid.ui.Home.HomeFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
     private static final String TAG = "LoginDebug";
+    private static final int GOOGLE_SIGN_IN_CODE = 100; // Request code for Google Sign-In
 
     TextInputEditText etEmailOrUsername, etPassword;
-    Button btnIniciarSesion;
+    Button btnIniciarSesion, btnGoogleSignIn;
     FirebaseAuth mAuth;
     TextView tvRegisterAccount;
     FirebaseDatabase firebase;
     DatabaseReference dbRef;
     ProgressBar progressBar;
+    GoogleSignInClient googleSignInClient;
 
 
     //planificacion del recordar usuario
@@ -51,12 +65,25 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         tvRegisterAccount = findViewById(R.id.tvRegisterAccount);
+        SignInButton btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
         progressBar = findViewById(R.id.progressBar);
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         firebase = FirebaseDatabase.getInstance();
         dbRef = firebase.getReference("users");
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id)) // Uses value from strings.xml
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        // Google Sign-In Button Click
+        btnGoogleSignIn.setOnClickListener(view -> {
+            Intent intent = googleSignInClient.getSignInIntent();
+            startActivityForResult(intent, GOOGLE_SIGN_IN_CODE);
+        });
 
         tvRegisterAccount.setOnClickListener(view -> {
             Intent i = new Intent(getApplicationContext(), Registro.class);
@@ -102,6 +129,37 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GOOGLE_SIGN_IN_CODE) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount googleSignInAccount = task.getResult(ApiException.class);
+                if (googleSignInAccount != null) {
+                    firebaseAuthWithGoogle(googleSignInAccount);
+                }
+            } catch (ApiException e) {
+                Log.e(TAG, "Error al iniciar sesión en Google: " + e.getStatusCode());
+                Toast.makeText(Login.this, "Error al iniciar sesión en Google", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount googleSignInAccount) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(Login.this, "Inicio de sesión en Google con éxito", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Login.this, Main.class));
+                finish();
+            } else {
+                Toast.makeText(Login.this, "Error de autenticación", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void signInWithEmail(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -109,7 +167,7 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
                         Toast.makeText(Login.this, "Login realizado con éxito", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), Home.class);
+                        Intent i = new Intent(getApplicationContext(), Main.class);
                         startActivity(i);
                         finish();
                     } else {

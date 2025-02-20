@@ -17,5 +17,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="default_web_client_id">374235659774-n8hp2uu0bl99cgrc0heth34kkltjdpkk.apps.googleusercontent.com</string>
+    <string name="ranking_navigation">Ranking</string>
+    <string name="desafios_navigation">Desafios</string>
 
 </resources>

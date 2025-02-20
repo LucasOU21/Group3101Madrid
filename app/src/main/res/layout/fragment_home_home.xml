@@ -1,23 +1,24 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:paddingTop="?attr/actionBarSize"
+    android:fitsSystemWindows="true"
     android:background="@color/light_gray">
 
-    <!-- Large Centered LinearLayout -->
     <LinearLayout
         android:id="@+id/centerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        android:padding="20dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:padding="25dp"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Barra superior -->
         <LinearLayout
@@ -66,10 +67,9 @@
                 android:id="@+id/imageBtnPerfil"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@drawable/foto_perfil_ejemplo"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="3dp"
-                />
+                android:src="@drawable/foto_perfil_ejemplo" />
         </LinearLayout>
 
         <!-- New LinearLayout for "Empieza" Section -->
@@ -77,9 +77,9 @@
             android:id="@+id/llEmpieza"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/llTop_bar">
 
             <TextView
@@ -98,23 +98,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnOne"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/green"
-                android:text="Crear Nuevo Grupo"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/btnTwo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Entrar en Grupo"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/outline_button"
-                android:textColor="@color/green"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -124,27 +108,39 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintTop_toBottomOf="@id/centerLayout"
-        app:layout_constraintBottom_toTopOf="@id/llBot_bar">
+        app:layout_constraintBottom_toTopOf="@id/nav_view">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="25dp">
 
+            <!-- Trending Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trending 🔥"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Trending First Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
 
-                <!-- Create six side-by-side smaller LinearLayouts -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:background="@color/white"
                     android:gravity="center">
                     <TextView
@@ -159,9 +155,9 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:background="@color/white"
                     android:gravity="center">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -171,17 +167,19 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Trending Second Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:background="@color/white"
                     android:gravity="center">
                     <TextView
@@ -196,28 +194,80 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:background="@color/white"
                     android:gravity="center">
                     <TextView
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:text="101 talleres."
+                        android:text="101 talleres"
                         android:gravity="center"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Most Completed Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Most Completed ⭐"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Most Completed First Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="101 Playas"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="101 Museos"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Most Completed Second Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:background="@color/white"
                     android:gravity="center">
                     <TextView
@@ -232,89 +282,121 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:background="@color/white"
                     android:gravity="center">
                     <TextView
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:text="101 jardines"
                         android:gravity="center"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- Recent Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recents 🕒"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Recent First Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="101 Mercados"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="101 Festivales"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Recent Second Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="101 Teatros"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/white"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="101 Galerías"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Bar -->
-    <LinearLayout
-        android:id="@+id/llBot_bar"
-        android:layout_width="match_parent"
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/imgBtnRanking"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/img_ranking"
-                app:tint="@color/black"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Ranking"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/imgBtnDesafios"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/img_desafios"
-                app:tint="@color/black"
-                android:onClick="onClickDesafios"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Desafíos"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/Explorar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/img_explorar"
-                app:tint="@color/black"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Explorar"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

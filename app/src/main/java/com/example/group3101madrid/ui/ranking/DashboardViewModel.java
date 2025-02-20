@@ -1,4 +1,4 @@
-package com.example.group3101madrid.ui.dashboard;
+package com.example.group3101madrid.ui.ranking;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

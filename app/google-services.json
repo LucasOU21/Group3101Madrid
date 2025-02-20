@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "374235659774",
+    "firebase_url": "https://projecto3-101madrid-default-rtdb.firebaseio.com",
+    "project_id": "projecto3-101madrid",
+    "storage_bucket": "projecto3-101madrid.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374235659774:android:3cc34aa4b549ea8b90d4af",
+        "android_client_info": {
+          "package_name": "com.example.group3101madrid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374235659774-ujfps5t3cgi9d6q70i8e5qkss1ha1jan.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.group3101madrid",
+            "certificate_hash": "6607fc175ba8f38375ceb232fd6adb41ec26db4a"
+          }
+        },
+        {
+          "client_id": "374235659774-n8hp2uu0bl99cgrc0heth34kkltjdpkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfmxK_rIJ-9AJZ4XdN9vO3tOypBMYcnZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374235659774-n8hp2uu0bl99cgrc0heth34kkltjdpkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

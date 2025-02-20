@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.group3101madrid.ui.home.HomeFragment"
+        android:name="com.example.group3101madrid.ui.Home.HomeFragment"
         android:label="@string/title_home"
+        tools:layout="@layout/fragment_home_home" />
+
+    <fragment
+        android:id="@+id/navigation_ranking_home"
+        android:name="com.example.group3101madrid.ui.ranking.RankingHomeFragment"
+        android:label="@string/ranking_navigation"
         tools:layout="@layout/fragment_ranking_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.group3101madrid.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_desafios_home"
+        android:name="com.example.group3101madrid.ui.desafios.DesafiosHomeFragment"
+        android:label="@string/desafios_navigation"
         tools:layout="@layout/fragment_desafios_home" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.group3101madrid.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_explorar_home" />
 </navigation>
