@@ -7,13 +7,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.group3101madrid.databinding.ActivityMainBinding;
-import com.example.group3101madrid.ui.ranking.DashboardViewModel;
-
 
 public class Main extends AppCompatActivity {
-
-    ActivityMainBinding binding;
-
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +26,6 @@ public class Main extends AppCompatActivity {
 
             // Setup the bottom navigation with NavController
             NavigationUI.setupWithNavController(binding.navView, navController);
-
-            // Set Home as selected item
-            binding.navView.setSelectedItemId(R.id.navigation_home);
         }
     }
 
