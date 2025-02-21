@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.example.group3101madrid.DesafioDetailActivity;
-import com.example.group3101madrid.Perfil;
+import com.example.group3101madrid.Perfil.Perfil;
 import com.example.group3101madrid.R;
 
 public class HomeFragment extends Fragment {

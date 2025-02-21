@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearGrupo">
+    tools:context="Grupos.CrearGrupo">
 
     <LinearLayout
         android:id="@+id/llTop_bar"
@@ -16,10 +16,19 @@
         android:padding="30dp"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Add this ImageView for the back button -->
+        <ImageView
+            android:id="@+id/ivBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/flecha"/>
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50dp"
             android:src="@drawable/img_101_logo" />
 
         <TextView
@@ -30,7 +39,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginLeft="25dp"/>
+            android:layout_marginLeft="6dp"/>
 
     </LinearLayout>
 

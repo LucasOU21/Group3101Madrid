@@ -14,22 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
+
         <activity
-            android:name=".UnirseGrupo"
+            android:name=".Perfil.DesafiosActivo"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Grupos.UnirseGrupo"
             android:exported="false" />
         <activity
-            android:name=".CrearGrupo"
+            android:name=".Grupos.CrearGrupo"
             android:exported="false" />
         <activity
             android:name=".Amigos"
             android:exported="false" />
         <activity
-            android:name=".Grupos"
+            android:name=".Grupos.Grupos"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="your_api_key_here" />
+            android:value="AIzaSyC6a0SBelUxj4MgRrOql3WXn2sIWLbIMF8" />
 
         <activity
             android:name=".ui.mapa.laMapaFragment"
@@ -43,12 +48,13 @@
             android:name=".DesafioDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".Perfil"
+            android:name=".Perfil.Perfil"
             android:exported="false" />
         <activity
             android:name=".Registro"
             android:exported="false" />
         <activity
+
             android:name=".Login"
             android:exported="true">
             <intent-filter>

@@ -1,14 +1,13 @@
-package com.example.group3101madrid;
+package com.example.group3101madrid.Grupos;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.group3101madrid.Amigos;
+import com.example.group3101madrid.R;
 
 public class Grupos extends AppCompatActivity {
 
@@ -20,6 +19,7 @@ public class Grupos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grupos);
+        findViewById(R.id.ivBackButton).setOnClickListener(view -> finish());
 
         btnAmigos = findViewById(R.id.btnAmigos);
         btnCrearGrupo = findViewById(R.id.btnCrearGrupo);
