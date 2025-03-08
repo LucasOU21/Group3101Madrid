@@ -2,6 +2,7 @@ package com.example.group3101madrid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -137,17 +138,21 @@ public class DesafioDetailActivity extends AppCompatActivity {
 
                 userProgressRef.setValue(progressData)
                         .addOnSuccessListener(aVoid -> {
-                            Intent mapIntent = new Intent(DesafioDetailActivity.this, laMapaFragment.class);
+                            // Add logging
+                            Log.d("DesafioDebug", "Starting MapActivity with desafioType: " + desafioType);
+
+                            Intent mapIntent = new Intent(DesafioDetailActivity.this, com.example.group3101madrid.MapActivity.class);
                             mapIntent.putExtra("DESAFIO_TYPE", desafioType);
                             mapIntent.putExtra("SHOW_MARKER", true);
                             startActivity(mapIntent);
                             finish();
                         })
-                        .addOnFailureListener(e ->
-                                Toast.makeText(DesafioDetailActivity.this,
-                                        "Error al iniciar el desafío: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show()
-                        );
+                        .addOnFailureListener(e -> {
+                            Log.e("DesafioDebug", "Failed to start desafio: " + e.getMessage());
+                            Toast.makeText(DesafioDetailActivity.this,
+                                    "Error al iniciar el desafío: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        });
             }
 
             @Override

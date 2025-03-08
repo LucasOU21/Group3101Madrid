@@ -85,7 +85,7 @@
                         android:id="@+id/ivSecondPlace"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/foto_perfil_ejemplo"
+                        android:src="@drawable/profileranking3"
                         app:civ_border_width="2dp"
                         app:civ_border_color="#c0c0c0"/>
 
@@ -128,7 +128,7 @@
                         android:id="@+id/ivFirstPlace"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/foto_perfil_ejemplo"
+                        android:src="@drawable/profileranking1"
                         app:civ_border_width="3dp"
                         app:civ_border_color="#ffd700"/>
 
@@ -172,7 +172,7 @@
                         android:id="@+id/ivThirdPlace"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/foto_perfil_ejemplo"
+                        android:src="@drawable/profileranking4"
                         app:civ_border_width="2dp"
                         app:civ_border_color="#CD7F32"/>
 

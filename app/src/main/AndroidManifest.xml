@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,11 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
-
+        <activity
+            android:name=".MapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Group3101Madrid" />
         <activity
             android:name=".Perfil.DesafiosActivo"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Grupos.UnirseGrupo"
             android:exported="false" />
@@ -54,7 +59,6 @@
             android:name=".Registro"
             android:exported="false" />
         <activity
-
             android:name=".Login"
             android:exported="true">
             <intent-filter>

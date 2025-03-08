@@ -1,147 +1,141 @@
 package com.example.group3101madrid.ui.mapa;
 
 import android.os.Bundle;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.group3101madrid.R;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class laMapaFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
+public class laMapaFragment extends Fragment implements OnMapReadyCallback {
 
-    private GoogleMap nMap;
-    private View rootView;
+    private GoogleMap mMap;
+    private String desafioType;
+    private boolean showMarker;
+    private Marker userMarker;
+    private Marker destinationMarker;
+    private TextView tvDistance;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_la_mapa, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_la_mapa, container, false);
 
+        // Get arguments if passed
+        Bundle args = getArguments();
+        if (args != null) {
+            desafioType = args.getString("DESAFIO_TYPE");
+            showMarker = args.getBoolean("SHOW_MARKER", false);
+        }
+
+        // Initialize map
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.fgMap);
-        if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
-            getChildFragmentManager().beginTransaction()
-                    .replace(R.id.fgMap, mapFragment)
-                    .commit();
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
         }
-        mapFragment.getMapAsync(this);
 
-        return rootView;
+        // Try to find the distance TextView from parent activity if exists
+        View parentView = getActivity().findViewById(android.R.id.content);
+        tvDistance = parentView.findViewById(R.id.tvDistance);
+
+        return root;
     }
 
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
-        Log.d("MapDebug", "Map is ready");
-        nMap = googleMap;
+        // Enable my location button (requires permission checks in containing activity)
+        try {
+            mMap.setMyLocationEnabled(true);
+        } catch (SecurityException e) {
+            // Permission handling should be done in the containing activity
+            e.printStackTrace();
+        }
 
-
-        // Enable UI settings
-        nMap.getUiSettings().setZoomControlsEnabled(true);
-        nMap.getUiSettings().setCompassEnabled(true);
-        nMap.getUiSettings().setMapToolbarEnabled(true);
-
-        // Set map type (you can change to MAP_TYPE_SATELLITE if preferred)
-        nMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        // Set click listeners
-        nMap.setOnMapClickListener(this);
-        nMap.setOnMapLongClickListener(this);
-
-        // Add permanent markers
-        addPermanentMarkers();
-
-        // Set center position and zoom
-        LatLng basilicaSanMarino = new LatLng(43.9362205, 12.4469272);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(basilicaSanMarino, 12f);
-        nMap.moveCamera(cameraUpdate);
-
-        // Set info window click listener
-        nMap.setOnInfoWindowClickListener(marker -> {
-            String uri = "google.navigation:q="
-                    + marker.getPosition().latitude
-                    + ","
-                    + marker.getPosition().longitude
-                    + "&mode=w";
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            i.setPackage("com.google.android.apps.maps");
-
-            if (getActivity() != null) {
-                startActivity(i);
-            }
-        });
+        // Default location (Madrid)
+        LatLng madrid = new LatLng(40.416775, -3.703790);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(madrid, 15));
     }
 
-    private void addPermanentMarkers() {
-        LatLng sanMarinoStadium = new LatLng(43.9707725, 12.4760217);
-        LatLng basilicaSanMarino = new LatLng(43.9362205, 12.4469272);
-        LatLng acquavivaStadium = new LatLng(43.947049, 12.4072099);
-        LatLng fiorentinoStadium = new LatLng(43.908696, 12.4477807);
+    /**
+     * Updates the user's location on the map
+     * @param location The user's current location
+     */
+    public void updateUserLocation(LatLng location) {
+        if (mMap == null) return;
 
-        nMap.addMarker(new MarkerOptions()
-                .position(basilicaSanMarino)
-                .title("Basilica San Marino")
-                .snippet("Click for directions")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        // Move camera to follow the user
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
 
-        nMap.addMarker(new MarkerOptions()
-                .position(sanMarinoStadium)
-                .title("Estadio Nacional de San Marino")
-                .snippet("Click for directions")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        // Update or add the user marker
+        if (userMarker == null) {
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(location)
+                    .title("Tu ubicación")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            userMarker = mMap.addMarker(markerOptions);
+        } else {
+            userMarker.setPosition(location);
+        }
 
-        nMap.addMarker(new MarkerOptions()
-                .position(acquavivaStadium)
-                .title("Estadio de Acquaviva")
-                .snippet("Click for directions")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-
-        nMap.addMarker(new MarkerOptions()
-                .position(fiorentinoStadium)
-                .title("Estadio de Fiorentino")
-                .snippet("Click for directions")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        // Update distance to destination
+        updateDistanceToDestination(location);
     }
 
-    @Override
-    public void onMapClick(@NonNull LatLng latLng) {
-        // Clear previous temporary markers
-        nMap.clear();
+    /**
+     * Sets the destination marker on the map
+     * @param location The destination location
+     */
+    public void setDestinationMarker(LatLng location) {
+        if (mMap == null) return;
 
-        // Re-add permanent markers
-        addPermanentMarkers();
+        // Clear existing marker if it exists
+        if (destinationMarker != null) {
+            destinationMarker.remove();
+        }
 
-        // Add clicked location marker
-        nMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title("Selected Location")
-                .snippet("Lat: " + latLng.latitude + " Long: " + latLng.longitude)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                .draggable(true));
+        // Add the destination marker
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(location)
+                .title("Destino")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        destinationMarker = mMap.addMarker(markerOptions);
+
+        // Initially zoom to show the destination
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
     }
 
-    @Override
-    public void onMapLongClick(@NonNull LatLng latLng) {
-        String uri = "google.navigation:q=" + latLng.latitude + "," + latLng.longitude;
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
+    /**
+     * Updates the distance display between user and destination
+     */
+    private void updateDistanceToDestination(LatLng userLocation) {
+        if (destinationMarker != null && tvDistance != null) {
+            // Calculate distance in meters
+            LatLng destLocation = destinationMarker.getPosition();
+            float[] results = new float[1];
+            android.location.Location.distanceBetween(
+                    userLocation.latitude, userLocation.longitude,
+                    destLocation.latitude, destLocation.longitude,
+                    results);
 
-        if (getActivity() != null) {
-            startActivity(intent);
+            int distance = Math.round(results[0]);
+
+            // Update the TextView
+            tvDistance.setText("Distancia: " + distance + " m");
         }
     }
 }
