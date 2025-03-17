@@ -68,10 +68,19 @@ public class Login extends AppCompatActivity {
         SignInButton btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
         progressBar = findViewById(R.id.progressBar);
 
+        // Add this line to initialize the Forgot Password TextView
+        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
+
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         firebase = FirebaseDatabase.getInstance();
         dbRef = firebase.getReference("users");
+
+        // Add the click listener for the Forgot Password TextView
+        tvForgotPassword.setOnClickListener(view -> {
+            Intent intent = new Intent(Login.this, CambiarPasswordActivity.class);
+            startActivity(intent);
+        });
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)) // Uses value from strings.xml

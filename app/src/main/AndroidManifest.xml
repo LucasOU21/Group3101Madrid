@@ -18,6 +18,18 @@
         android:theme="@style/Theme.Group3101Madrid"
         tools:targetApi="31">
         <activity
+            android:name=".Perfil.SupportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CambiarPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SimpleExperienciaDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SimpleExperienciasActivity"
+            android:exported="false" />
+        <activity
             android:name=".MapActivity"
             android:exported="false"
             android:theme="@style/Theme.Group3101Madrid" />
@@ -31,7 +43,7 @@
             android:name=".Grupos.CrearGrupo"
             android:exported="false" />
         <activity
-            android:name=".Amigos"
+            android:name=".Amigos.Amigos"
             android:exported="false" />
         <activity
             android:name=".Grupos.Grupos"

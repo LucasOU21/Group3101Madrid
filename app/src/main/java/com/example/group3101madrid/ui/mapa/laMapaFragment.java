@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.group3101madrid.Experiencia;
+import com.example.group3101madrid.MapActivity;
 import com.example.group3101madrid.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,14 +21,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class laMapaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String desafioType;
     private boolean showMarker;
     private Marker userMarker;
-    private Marker destinationMarker;
     private TextView tvDistance;
+
+    // Map of markers for experiencias
+    private Map<String, Marker> experienciaMarkers = new HashMap<>();
+    private Map<String, Experiencia> experienciaMap = new HashMap<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,9 +73,46 @@ public class laMapaFragment extends Fragment implements OnMapReadyCallback {
             e.printStackTrace();
         }
 
-        // Default location (Madrid)
-        LatLng madrid = new LatLng(40.416775, -3.703790);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(madrid, 15));
+        // Get arguments for specific coordinates
+        Bundle args = getArguments();
+        if (args != null) {
+            double specificLatitude = args.getDouble("LATITUDE", 0);
+            double specificLongitude = args.getDouble("LONGITUDE", 0);
+            String specificExperienciaId = args.getString("EXPERIENCIA_ID", "");
+
+            // If specific coordinates were provided, center the map on them
+            if (specificLatitude != 0 && specificLongitude != 0) {
+                LatLng specificLocation = new LatLng(specificLatitude, specificLongitude);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(specificLocation, 15));
+
+                // You might want to add a special marker for this location
+                mMap.addMarker(new MarkerOptions()
+                        .position(specificLocation)
+                        .title("Experiencia")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            } else {
+                // Default location (Madrid)
+                LatLng madrid = new LatLng(40.416775, -3.703790);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(madrid, 15));
+            }
+        } else {
+            // Default location (Madrid)
+            LatLng madrid = new LatLng(40.416775, -3.703790);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(madrid, 15));
+        }
+
+        // Set up marker click listener
+        mMap.setOnMarkerClickListener(marker -> {
+            Object tag = marker.getTag();
+            if (tag instanceof Experiencia) {
+                // Show experiencia detail dialog
+                if (getActivity() instanceof MapActivity) {
+                    ((MapActivity) getActivity()).showExperienciaDetail((Experiencia) tag);
+                }
+                return true;
+            }
+            return false;
+        });
     }
 
     /**
@@ -77,9 +121,6 @@ public class laMapaFragment extends Fragment implements OnMapReadyCallback {
      */
     public void updateUserLocation(LatLng location) {
         if (mMap == null) return;
-
-        // Move camera to follow the user
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
 
         // Update or add the user marker
         if (userMarker == null) {
@@ -92,50 +133,106 @@ public class laMapaFragment extends Fragment implements OnMapReadyCallback {
             userMarker.setPosition(location);
         }
 
-        // Update distance to destination
-        updateDistanceToDestination(location);
-    }
-
-    /**
-     * Sets the destination marker on the map
-     * @param location The destination location
-     */
-    public void setDestinationMarker(LatLng location) {
-        if (mMap == null) return;
-
-        // Clear existing marker if it exists
-        if (destinationMarker != null) {
-            destinationMarker.remove();
+        // We only move the camera if we're not using experiencia markers
+        if (experienciaMarkers.isEmpty()) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
         }
 
-        // Add the destination marker
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(location)
-                .title("Destino")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        destinationMarker = mMap.addMarker(markerOptions);
-
-        // Initially zoom to show the destination
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        // Update distance display for the closest experiencia
+        updateDistanceToClosestExperiencia(location);
     }
 
     /**
-     * Updates the distance display between user and destination
+     * Adds a marker for an experiencia on the map
+     * @param location The location for the marker
+     * @param title The title for the marker
+     * @param experiencia The experiencia data to attach to the marker
      */
-    private void updateDistanceToDestination(LatLng userLocation) {
-        if (destinationMarker != null && tvDistance != null) {
-            // Calculate distance in meters
-            LatLng destLocation = destinationMarker.getPosition();
+    public void addMarker(LatLng location, String title, Experiencia experiencia) {
+        if (mMap == null || experiencia == null) return;
+
+        // Create the marker
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(location)
+                .title(title)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+        Marker marker = mMap.addMarker(markerOptions);
+
+        // Store the experiencia with the marker
+        marker.setTag(experiencia);
+
+        // Add to our maps
+        experienciaMarkers.put(experiencia.getId(), marker);
+        experienciaMap.put(experiencia.getId(), experiencia);
+    }
+
+    /**
+     * Updates a marker to show it's been completed
+     * @param experienciaId The ID of the completed experiencia
+     */
+    public void updateMarkerCompleted(String experienciaId) {
+        Marker marker = experienciaMarkers.get(experienciaId);
+        if (marker != null) {
+            // Change marker color to green to indicate completion
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        }
+    }
+
+    /**
+     * Clears all markers from the map
+     */
+    public void clearMarkers() {
+        if (mMap != null) {
+            mMap.clear();
+            experienciaMarkers.clear();
+            experienciaMap.clear();
+            userMarker = null;
+        }
+    }
+
+    /**
+     * Centers the map on the specified location
+     * @param location The location to center on
+     */
+    public void centerMapOn(LatLng location) {
+        if (mMap != null && location != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        }
+    }
+
+    /**
+     * Updates the distance display to show the closest experiencia
+     */
+    private void updateDistanceToClosestExperiencia(LatLng userLocation) {
+        if (mMap == null || tvDistance == null || userLocation == null || experienciaMarkers.isEmpty()) {
+            return;
+        }
+
+        // Find the closest experiencia
+        float closestDistance = Float.MAX_VALUE;
+        String closestTitle = "";
+
+        for (Map.Entry<String, Marker> entry : experienciaMarkers.entrySet()) {
+            Marker marker = entry.getValue();
+            LatLng markerPos = marker.getPosition();
+
             float[] results = new float[1];
             android.location.Location.distanceBetween(
                     userLocation.latitude, userLocation.longitude,
-                    destLocation.latitude, destLocation.longitude,
+                    markerPos.latitude, markerPos.longitude,
                     results);
 
-            int distance = Math.round(results[0]);
+            if (results[0] < closestDistance) {
+                closestDistance = results[0];
+                closestTitle = marker.getTitle();
+            }
+        }
 
-            // Update the TextView
-            tvDistance.setText("Distancia: " + distance + " m");
+        // Update the distance text
+        if (closestDistance < Float.MAX_VALUE) {
+            int distance = Math.round(closestDistance);
+            tvDistance.setText(closestTitle + ": " + distance + " m");
         }
     }
 }

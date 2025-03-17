@@ -36,6 +36,7 @@ public class Perfil extends AppCompatActivity {
 
     private Button btnSignOut;
     private Button btnGrupos;
+    private Button btnAyudaSoporte;
     private TextView tvUsername;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -70,6 +71,7 @@ public class Perfil extends AppCompatActivity {
         // Initialize views
         btnSignOut = findViewById(R.id.btnSignOut);
         btnGrupos = findViewById(R.id.btnGrupos);
+        btnAyudaSoporte = findViewById(R.id.btnAyudaSoporte);
         tvUsername = findViewById(R.id.textView5);
 
         // Set user display name
@@ -79,6 +81,11 @@ public class Perfil extends AppCompatActivity {
 
         btnGrupos.setOnClickListener(view -> {
             Intent intent = new Intent(Perfil.this, Grupos.class);
+            startActivity(intent);
+        });
+
+        btnAyudaSoporte.setOnClickListener(view -> {
+            Intent intent = new Intent(Perfil.this, SupportActivity.class);
             startActivity(intent);
         });
 
@@ -101,9 +108,50 @@ public class Perfil extends AppCompatActivity {
 
         // Load existing profile picture
         loadProfilePicture();
+    }
 
+    private void enviarCorreoSoporte() {
+        // Get user information to personalize support email
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String userEmail = currentUser != null ? currentUser.getEmail() : "No disponible";
+        String userName = currentUser != null ? (currentUser.getDisplayName() != null ?
+                currentUser.getDisplayName() : "Usuario") : "Usuario";
 
-}
+        // Support email address
+        String email = "101MadridAdmin@Support.com";
+
+        // Create a more detailed subject line
+        String subject = "Soporte 101 Madrid - Consulta de Usuario";
+
+        // Create a detailed template message with user info and common issues
+        String body = "Hola Equipo de Soporte de 101 Madrid,\n\n" +
+                "Soy " + userName + " y necesito ayuda con la aplicación.\n\n" +
+                "Detalles de mi cuenta:\n" +
+                "- Correo: " + userEmail + "\n\n" +
+                "Descripción del problema:\n" +
+                "[Por favor, describe aquí tu problema con la mayor cantidad de detalles posible]\n\n" +
+                "Pasos para reproducir:\n" +
+                "1. \n2. \n3. \n\n" +
+                "Dispositivo: " + android.os.Build.MODEL + "\n" +
+                "Versión Android: " + android.os.Build.VERSION.RELEASE + "\n\n" +
+                "Gracias por tu ayuda,\n" +
+                userName;
+
+        // Create the email intent
+        Uri uri = Uri.parse("mailto:" + email +
+                "?subject=" + Uri.encode(subject) +
+                "&body=" + Uri.encode(body));
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+
+        try {
+            startActivity(Intent.createChooser(intent, "Enviar correo de soporte"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(Perfil.this,
+                    "No tienes ninguna app de correo instalada",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void updateUserInterface() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -201,7 +249,6 @@ public class Perfil extends AppCompatActivity {
         }
     }
 
-    // Add these new methods
     private void handleImageResult(Uri imageUri) {
         if (imageUri != null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();

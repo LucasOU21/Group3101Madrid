@@ -31,8 +31,9 @@
                 android:src="@drawable/img_101_logo" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
@@ -55,6 +56,26 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <!-- Home button -->
+            <ImageButton
+                android:id="@+id/btnHomeNav"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Ir a inicio"
+                android:padding="8dp"
+                android:src="@drawable/ic_home_black_24dp" />
+
+            <!-- Profile button -->
+            <ImageButton
+                android:id="@+id/btnProfileNav"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile_circle"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:contentDescription="Ir a perfil"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -90,6 +111,39 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:padding="16dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="#F0F0F0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Progreso"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tvCompletionStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completado: 0 / 0"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp"/>
+
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progressCompletion"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progressTint="@color/green"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/location_text"

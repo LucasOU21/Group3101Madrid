@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.group3101madrid.Amigos;
+import com.example.group3101madrid.Amigos.Amigos;
 import com.example.group3101madrid.R;
 
 public class Grupos extends AppCompatActivity {
