@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.group3101madrid.R;
 
 import java.util.ArrayList;
@@ -40,10 +41,22 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingV
         public void bind(RankingItem item) {
             tvRankPosition.setText(String.valueOf(item.getPosition()));
             tvName.setText(item.getName());
-            tvScore.setText(item.getScore() + " desafios");
+            tvScore.setText(item.getScore() + " puntos");
 
-            if (item.getProfileImage() != null) {
+            // Handle profile image
+            if (item.getProfileImageUrl() != null && !item.getProfileImageUrl().isEmpty()) {
+                // Load from URL
+                Glide.with(ivProfile.getContext())
+                        .load(item.getProfileImageUrl())
+                        .placeholder(R.drawable.foto_perfil_ejemplo)
+                        .error(R.drawable.foto_perfil_ejemplo)
+                        .into(ivProfile);
+            } else if (item.getProfileImage() != null) {
+                // Load from resource
                 ivProfile.setImageResource(item.getProfileImage());
+            } else {
+                // Default image
+                ivProfile.setImageResource(R.drawable.foto_perfil_ejemplo);
             }
         }
     }
