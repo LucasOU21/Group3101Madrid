@@ -42,6 +42,10 @@ public class SimpleExperienciaAdapter extends RecyclerView.Adapter<SimpleExperie
         // Set title
         holder.tvTitle.setText(experiencia.getTitle());
 
+        // Add points indicator to title
+        String puntosTxt = " (" + experiencia.getPuntos() + "★)";
+        holder.tvTitle.append(puntosTxt);
+
         // Set completed status
         if (experiencia.isCompleted()) {
             holder.ivStatus.setImageResource(android.R.drawable.ic_menu_edit);

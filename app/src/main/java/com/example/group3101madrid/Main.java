@@ -1,3 +1,4 @@
+// Main.java
 package com.example.group3101madrid;
 
 import android.os.Bundle;
@@ -5,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-
 import com.example.group3101madrid.databinding.ActivityMainBinding;
 
 public class Main extends AppCompatActivity {
@@ -24,10 +24,11 @@ public class Main extends AppCompatActivity {
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
 
-            // Setup the bottom navigation with NavController
+            //Setup the bottom navigation with NavController
             NavigationUI.setupWithNavController(binding.navView, navController);
         }
     }
+
 
     @Override
     protected void onDestroy() {

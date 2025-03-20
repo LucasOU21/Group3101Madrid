@@ -169,12 +169,21 @@ public class SimpleExperienciasActivity extends AppCompatActivity {
                     Double latitude = expSnapshot.child("latitude").getValue(Double.class);
                     Double longitude = expSnapshot.child("longitude").getValue(Double.class);
 
+                    // Get the puntos value, default to 1 if not found
+                    Integer puntos = expSnapshot.child("puntos").getValue(Integer.class);
+                    if (puntos == null) {
+                        puntos = 1;
+                    }
+
+                    // Ensure puntos is within valid range (1-5)
+                    puntos = Math.max(1, Math.min(5, puntos));
+
                     if (id != null && title != null) {
                         boolean completed = completedExperiencias.containsKey(id);
 
                         SimpleExperiencia experiencia = new SimpleExperiencia(
                                 id, title, description, imageUrl,
-                                latitude, longitude, completed);
+                                latitude, longitude, completed, puntos);
 
                         experienciasList.add(experiencia);
                     }
@@ -227,10 +236,11 @@ public class SimpleExperienciasActivity extends AppCompatActivity {
         private Double latitude;
         private Double longitude;
         private boolean completed;
+        private int puntos; // New field for experience points
 
         public SimpleExperiencia(String id, String title, String description,
                                  String imageUrl, Double latitude, Double longitude,
-                                 boolean completed) {
+                                 boolean completed, int puntos) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -238,14 +248,33 @@ public class SimpleExperienciasActivity extends AppCompatActivity {
             this.latitude = latitude;
             this.longitude = longitude;
             this.completed = completed;
+            this.puntos = puntos;
         }
 
-        public String getId() { return id; }
-        public String getTitle() { return title; }
-        public String getDescription() { return description; }
-        public String getImageUrl() { return imageUrl; }
-        public Double getLatitude() { return latitude; }
-        public Double getLongitude() { return longitude; }
-        public boolean isCompleted() { return completed; }
+        // Getters and setters
+        public String getId() {
+            return id;
+        }
+        public String getTitle() {
+            return title;
+        }
+        public String getDescription() {
+            return description;
+        }
+        public String getImageUrl() {
+            return imageUrl;
+        }
+        public Double getLatitude() {
+            return latitude;
+        }
+        public Double getLongitude() {
+            return longitude;
+        }
+        public boolean isCompleted() {
+            return completed;
+        }
+        public int getPuntos() {
+            return puntos;
+        }
     }
 }

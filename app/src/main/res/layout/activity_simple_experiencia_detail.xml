@@ -38,6 +38,8 @@
                 android:textStyle="bold"
                 android:layout_marginStart="16dp"/>
 
+
+
             <!-- Home button -->
             <ImageButton
                 android:id="@+id/btnHomeNav"
@@ -97,6 +99,16 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tvPuntos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dificultad: Media (3 puntos)"
+                    android:textSize="14sp"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
 
                 <!-- Description -->
                 <TextView

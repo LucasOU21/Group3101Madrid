@@ -8,13 +8,21 @@ public class Experiencia {
     private String description;
     private String imageUrl;
     private LatLng location;
+    private int puntos; // New field for experience points (1-5)
 
-    public Experiencia(String id, String title, String description, String imageUrl, LatLng location) {
+    public Experiencia(String id, String title, String description, String imageUrl, LatLng location, int puntos) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.location = location;
+        this.puntos = puntos;
+    }
+
+    // Default constructor
+    public Experiencia() {
+        // Default to 1 point if not specified
+        this.puntos = 1;
     }
 
     public String getDescription() {
@@ -55,5 +63,20 @@ public class Experiencia {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        // Ensure points are within the valid range (1-5)
+        if (puntos < 1) {
+            this.puntos = 1;
+        } else if (puntos > 5) {
+            this.puntos = 5;
+        } else {
+            this.puntos = puntos;
+        }
     }
 }

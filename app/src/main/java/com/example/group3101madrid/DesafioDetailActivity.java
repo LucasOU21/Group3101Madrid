@@ -298,7 +298,7 @@ public class DesafioDetailActivity extends AppCompatActivity {
                 }
             }
 
-            // Add this method to your DesafioDetailActivity class
+
             private void updateCompletionStatus(int completed, int total) {
                 // Find TextView that we'll use to display completion status
                 TextView tvCompletionStatus = findViewById(R.id.tvCompletionStatus);
@@ -322,8 +322,6 @@ public class DesafioDetailActivity extends AppCompatActivity {
                 // You can also update the button text if all experiences are completed
                 if (completed == total && total > 0) {
                     startButton.setText("Desafío Completado");
-                    // Optionally disable the button or change its appearance
-                    // startButton.setEnabled(false);
                 }
             }
 

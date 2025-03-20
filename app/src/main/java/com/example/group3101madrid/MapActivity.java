@@ -52,6 +52,7 @@ public class MapActivity extends AppCompatActivity {
     private TextView tvMapTitle;
     private ImageButton btnPrevDesafio;
     private ImageButton btnNextDesafio;
+    private String specificExperienciaTitle = null;
 
     // Desafios and experiencias data
     private List<String> desafioTypesList;
@@ -85,10 +86,11 @@ public class MapActivity extends AppCompatActivity {
         currentDesafioType = getIntent().getStringExtra("DESAFIO_TYPE");
         boolean showMarker = getIntent().getBooleanExtra("SHOW_MARKER", false);
 
-// Get specific coordinates if provided
+        // Get specific coordinates and title if provided
         double specificLatitude = getIntent().getDoubleExtra("LATITUDE", 0);
         double specificLongitude = getIntent().getDoubleExtra("LONGITUDE", 0);
         String specificExperienciaId = getIntent().getStringExtra("EXPERIENCIA_ID");
+        specificExperienciaTitle = getIntent().getStringExtra("EXPERIENCIA_TITLE");
 
         if (currentDesafioType == null) {
             Toast.makeText(this, "Error: No se especificó el tipo de desafío", Toast.LENGTH_SHORT).show();
@@ -158,6 +160,9 @@ public class MapActivity extends AppCompatActivity {
         currentDesafioIndex = newIndex;
         currentDesafioType = desafioTypesList.get(currentDesafioIndex);
 
+        // Clear specific experiencia title when navigating between desafios
+        specificExperienciaTitle = null;
+
         // Update title
         updateDesafioTitle();
 
@@ -166,11 +171,15 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void updateDesafioTitle() {
-        String title = desafioTitles.get(currentDesafioType);
-        if (title != null) {
-            tvMapTitle.setText(title);
+        if (specificExperienciaTitle != null) {
+            tvMapTitle.setText(specificExperienciaTitle);
         } else {
-            tvMapTitle.setText(currentDesafioType);
+            String title = desafioTitles.get(currentDesafioType);
+            if (title != null) {
+                tvMapTitle.setText(title);
+            } else {
+                tvMapTitle.setText(currentDesafioType);
+            }
         }
     }
 
@@ -321,9 +330,18 @@ public class MapActivity extends AppCompatActivity {
                     Double latitude = expSnapshot.child("latitude").getValue(Double.class);
                     Double longitude = expSnapshot.child("longitude").getValue(Double.class);
 
+                    // Get puntos, default to 1 if not found
+                    Integer puntos = expSnapshot.child("puntos").getValue(Integer.class);
+                    if (puntos == null) {
+                        puntos = 1;
+                    }
+
+                    // Ensure puntos is within valid range (1-5)
+                    puntos = Math.max(1, Math.min(5, puntos));
+
                     if (id != null && title != null && latitude != null && longitude != null) {
                         Experiencia exp = new Experiencia(id, title, description, imageUrl,
-                                new LatLng(latitude, longitude));
+                                new LatLng(latitude, longitude), puntos);
                         experienciasList.add(exp);
                     }
                 }
@@ -413,10 +431,15 @@ public class MapActivity extends AppCompatActivity {
 
         tvTitle.setText(experiencia.getTitle());
 
-        if (experiencia.getDescription() != null) {
-            tvDescription.setText(experiencia.getDescription());
+        // Display coordinates instead of description
+        LatLng location = experiencia.getLocation();
+        if (location != null) {
+            String coordinates = String.format("Lat: %.6f, Lng: %.6f",
+                    location.latitude,
+                    location.longitude);
+            tvDescription.setText(coordinates);
         } else {
-            tvDescription.setText("No hay descripción disponible.");
+            tvDescription.setText("Coordenadas no disponibles");
         }
 
         // Load image with Glide

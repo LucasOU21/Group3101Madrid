@@ -69,6 +69,34 @@ public class SimpleExperienciaDetailActivity extends AppCompatActivity {
         hours = getIntent().getStringExtra("HOURS");
         tips = getIntent().getStringExtra("TIPS");
         category = getIntent().getStringExtra("CATEGORY");
+        int puntos = getIntent().getIntExtra("PUNTOS", 1);
+
+        // Initialize views including a new TextView for puntos
+        TextView tvPuntos = findViewById(R.id.tvPuntos);
+
+        // Set the puntos value with a visual indicator of difficulty
+        String dificultad;
+        switch(puntos) {
+            case 1:
+                dificultad = "Muy fácil";
+                break;
+            case 2:
+                dificultad = "Fácil";
+                break;
+            case 3:
+                dificultad = "Media";
+                break;
+            case 4:
+                dificultad = "Difícil";
+                break;
+            case 5:
+                dificultad = "Muy difícil";
+                break;
+            default:
+                dificultad = "Fácil";
+        }
+
+        tvPuntos.setText("Dificultad: " + dificultad + " (" + puntos + " puntos)");
 
         if (experienciaId == null || desafioType == null) {
             Toast.makeText(this, "Error: Datos incompletos", Toast.LENGTH_SHORT).show();
@@ -212,10 +240,10 @@ public class SimpleExperienciaDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra("DESAFIO_TYPE", desafioType);
         intent.putExtra("SHOW_MARKER", true);
-        // Pass the specific coordinates to center on
         intent.putExtra("LATITUDE", latitude);
         intent.putExtra("LONGITUDE", longitude);
         intent.putExtra("EXPERIENCIA_ID", experienciaId);
+        intent.putExtra("EXPERIENCIA_TITLE", title); // Add this line
         startActivity(intent);
     }
 
